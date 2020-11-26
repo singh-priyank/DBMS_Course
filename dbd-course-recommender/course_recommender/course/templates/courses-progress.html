@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load static %}
+{% load customized_filter %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'dashboard/css/dashboard-style.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!--====== PAGE BANNER PART START ======-->
+
+<section id="page-banner" class="pt-105 pb-110 bg_cover" data-overlay="8"
+    style="background-image: url('/static/images/page-banner-1.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-banner-cont">
+                    <h2>Dashboard</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'course-home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                        </ol>
+                    </nav>
+                </div> <!-- page banner cont -->
+            </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
+</section>
+
+<!--====== PAGE BANNER PART ENDS ======-->
+
+
+<!-- 公告 start -->
+<section class="areaList explosion mt-60">
+    <div class="container clearfix">
+        {% if has_enrolled_course0 %}
+        <div class="row">
+            <!-- start -->
+            <aside class="fl areaType bgWhite newer">
+                <div class="areaName">
+                    <h4>{{ enrolled_course0.subject.name }}</h4>
+                    <a class="link_t link999" href="{% url 'courses-single' enrolled_course0.subject.id %}">info&gt;</a>
+                </div>
+                <div class="clearfix">
+                    <p class="notice fl">
+                        Section xx
+                    </p>
+                    <div class="fr detail">
+                        <div class="rateInfo">
+                            <span class="rate fcDeepRed"><em>1h</em>left</span>
+                            <span class="rateNotice fc666">P r o c e s s</span>
+                        </div>
+                        <p class="fc999">
+                            Already
+                            <em class="fcDeepRed">7</em> h
+                            <em class="fcDeepRed">40</em> min
+                        </p>
+                    </div>
+                </div>
+                <a class="link_c link333" href="{% url 'courses-single' enrolled_course0.subject.id %}">go ahead &gt;</a>
+            </aside>
+            <!--end -->
+            <!-- start -->
+            {% if has_enrolled_course1 %}
+            <aside class="fl areaType bgWhite boom">
+                <div class="areaName">
+                    <h4>{{ enrolled_course1.subject.name }}</h4>
+                    <a class="link_t link999" href="{% url 'courses-single' enrolled_course1.subject.id %}">info &gt;</a>
+                </div>
+                <div class="clearfix">
+                    <div class="detail">
+                        <div class="rateInfo">
+                            <p>
+                                Section xx
+                            </p>
+                            <span class="rate fcDeepRed"><em>34</em>h </span>
+                            <span class="rate fcDeepRed"><em>24</em>min</span>
+                            <div class="pgSpeed">
+                                <span class="pgLine" data-speed="1">
+                                    <span class="bgRed" style="width:30%"></span>
+                                </span>
+                                <span class="fcRed pgText"><em>30</em>%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="goInvest">
+                        <a href="#"></a>
+                    </div>
+                </div>
+            </aside>
+            {% endif %}
+            <!-- end -->
+            {% if has_enrolled_course_remain %}
+            <aside class="fl areaType bgWhite noticeList">
+                <div class="areaName">
+                    <h4>Enrolled Subject List</h4>
+                    <a class="link_t link999" href="#">info&gt;</a>
+                </div>
+                <ul class="clearfix nList cgNotice">
+                    {% for item in remain_course_list %}
+                    <li>
+                        <a href="{% url 'courses-single' item.subject.id %}">
+                            {{ item.subject.name }}
+                        </a>
+                        <span class="fc666 data">{{ item.status | multiply:20 }}%</span>
+                    </li>
+                    {% endfor %}
+                    {% if has_more %}
+                    <li><a href="#">More...</a></li>
+                    {% endif %}
+                </ul>
+            </aside>
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="h2">You has not enrolled any course!</div>
+        {% endif %}
+    </div>
+</section>
+<!-- end -->
+<!-- start -->
+<section class="areaList productList youxuan">
+    <div class="container">
+        <div class="listCon bgWhite clearfix row">
+            <a class="fl areaType" href="{% url 'course-cb' %}">
+                <div class="areaName">
+                    <h4>Recommended Subjects</h4>
+                </div>
+                <p class="notice fc333">
+                    Content-based
+                </p>
+                <span class="link_c link666">more &gt;</span>
+            </a>
+            <article class="fl">
+                <ul class="pList fl">
+                    {% for course in recommended_courses_cb %}
+                    <li class="bgWhite">
+                        <a href="{% url 'courses-single' course.id %}">
+                            <div class="hBk">
+                            </div>
+                            <h4>{{ course.name }}</h4>
+                            <div class="pContent">
+                                <div class="rateInfo">
+                                    <img src="/static/images/course/cu-{{ forloop.counter }}.jpg" style="margin-top: 20px;width: 115px;height: 78px" alt="">
+                                    <span class="rate fcDeepRed "></span>
+                                </div>
+                                <div class="view downTimeC">
+                                    <span class="link333 link_s">detail</span>
+                                </div>
+                                <!--<span class="icon" style="background:none;"><img src="unpan/blue/src/model1.png" style="height: 100%; width: 100%;"></span>-->
+                            </div>
+                            <div class="fBk">
+                            </div>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+<!-- end -->
+<!-- start -->
+<section class="areaList productList xiaofei">
+    <div class="container">
+        <div class="listCon bgWhite clearfix row">
+            <a class="fl areaType" href="{% url 'course-cf' %}">
+                <div class="areaName">
+                    <h4>Recommended Subjects</h4>
+                </div>
+                <p class="notice fc333">
+                    Collaborative Filtering
+                </p>
+                <span class="link_c link666">more &gt;</span>
+            </a>
+            <article class="fl">
+                <ul class="pList fl">
+                    {% for course in recommended_courses_cf %}
+                    <li class="bgWhite">
+                        <a href="{% url 'courses-single' course.id %}">
+                            <div class="hBk">
+                            </div>
+                            <h4>{{ course.name }}</h4>
+                            <div class="pContent">
+                                <div class="rateInfo">
+                                    <img src="/static/images/course/cu-{{ forloop.counter }}.jpg" style="margin-top: 20px;width: 115px;height: 78px" alt="">
+                                    <span class="rate fcDeepRed "></span>
+                                </div>
+                                <div class="view downTimeC">
+                                    <span class="link333 link_s">detail</span>
+                                </div>
+                                <!--<span class="icon" style="background:none;"><img src="unpan/blue/src/model1.png" style="height: 100%; width: 100%;"></span>-->
+                            </div>
+                            <div class="fBk">
+                            </div>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}
