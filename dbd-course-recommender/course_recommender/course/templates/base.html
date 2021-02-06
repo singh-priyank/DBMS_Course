@@ -11,10 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!--====== Title ======-->
-    <title>UTS - E-Learning</title>
+    <!--<title>UTS - E-Learning</title>-->
     
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
+    <!--<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">-->
 
     <!--====== Slick css ======-->
     <link rel="stylesheet" href="{% static 'css/slick.css' %}">
@@ -135,9 +135,6 @@
                                     <li class="nav-item">
                                         <a class="{{ home_page }}" href="{% url 'course-home' %}">Home</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="{{ about_page }}" href="{% url 'course-about' %}">About</a>
-                                    </li>
                                     {% if user.is_superuser %}
                                     <li class="nav-item">
                                         <a href="{% url 'admin:index' %}">Admin</a>
@@ -148,6 +145,9 @@
                                         <a class="{{ courses_progress_page }}" href="{% url 'course-progress' %}">Dashboard</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="{{ courses_progress_page }}" href="{% url 'course-comparator' %}">Compare</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="{{ courses_page }}" href="{% url 'course-courses' %}">Courses</a>
                                         <ul class="sub-menu">
                                             <li><a href="{% url 'course-courses' %}">Course List</a></li>
@@ -156,42 +156,7 @@
                                         </ul>
                                     </li>
                                     {% endif %}
-                                    <!-- <li class="nav-item">
-                                        <a href="events.html">Events</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="events.html">Events List 1</a></li>
-                                            <li><a href="events-2.html">Events List 2</a></li>
-                                            <li><a href="events-single.html">Event Single</a></li>
-                                        </ul>
-                                    </li> 
-                                    <li class="nav-item">
-                                        <a class= "{{ teachers_page }}" href="{% url 'teachers'  %}">Lecturer</a>
-                                         <ul class="sub-menu">
-                                            <li><a href="{% url 'teachers'  %}">Lecturer</a></li>
-                                            <li><a href="{% url 'teachers-single' 1 %}">Lecturer Single</a></li>
-                                        </ul> 
-                                    </li> -->
-                                    <!-- <li class="nav-item">
-                                        <a href="blog.html">Blog</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog-single.html">Blog Single</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="shop.html">Shop</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="shop.html">Shop</a></li>
-                                            <li><a href="shop-single.html">Shop Single</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="contact.html">Contact</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="contact.html">Contact Us</a></li>
-                                            <li><a href="contact-2.html">Contact Us 2</a></li>
-                                        </ul>
-                                    </li> -->
+                        
                                 </ul>
                             </div>
                             <div class="right-icon text-right">
@@ -263,10 +228,10 @@
                                 <h6>Sitemap</h6>
                             </div>
                             <ul>
-                                <li><a href="/index.html"><i class="fa fa-angle-right"></i>Home</a></li>
-                                <li><a href="/about.html"><i class="fa fa-angle-right"></i>About us</a></li>
-                                <li><a href="courses.html"><i class="fa fa-angle-right"></i>Courses</a></li>
-                                <!--<li><a href="blog.html"><i class="fa fa-angle-right"></i>News</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Home</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>About us</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Courses</a></li>
+                                <!--<li><a href="/compare"><i class="fa fa-angle-right"></i>News</a></li>
                                 <li><a href="events.html"><i class="fa fa-angle-right"></i>Event</a></li> -->
                             </ul>
                             <ul>
@@ -274,7 +239,7 @@
                                 <li><a href="shop.html"><i class="fa fa-angle-right"></i>Shop</a></li>
                                 <li><a href="teachers.html"><i class="fa fa-angle-right"></i>Teachers</a></li> -->
                                 <li><a href="#"><i class="fa fa-angle-right"></i>Support</a></li>
-                                <li><a href="contact.html"><i class="fa fa-angle-right"></i>Contact</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Contact</a></li>
                             </ul>
                         </div> <!-- footer link -->
                     </div>
@@ -328,23 +293,6 @@
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- footer top -->
-        
-        <div class="footer-copyright pt-10 pb-25">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="copyright text-md-left text-center pt-15">
-                            <p>&copy; Copyrights 2020 All rights reserved. </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="copyright text-md-right text-center pt-15">
-                            <p>Designed by <span>Students</span> </p>
-                        </div>
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- footer copyright -->
     </footer>
     
     <!--====== FOOTER PART ENDS ======-->

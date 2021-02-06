@@ -4,7 +4,7 @@ import numpy as np  # linear algebra
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
-from .models import Subject, SubjectRating
+from .models import *
 from .services import (_from_random, _retrieve_recommendations_and_sort_by,
                        _validate)
 
@@ -48,7 +48,7 @@ def _from_collaborative_filtering(enrolled_subjects):
     recommended_subjects = []
 
     score_series = pd.Series(
-        subject_similarity[enrolledSubjectId]).sort_values(ascending=False)
+        subject_similarity[0]).sort_values(ascending=False)
 
     # select top 10 recommended subjects that are not in the enrolled subject list
     for items in score_series.iteritems():

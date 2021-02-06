@@ -11,7 +11,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='users-logout'),
     path('profile/', views.profile, name='users-profile'),
     path('register/', views.register, name='users-register'),
-    path('teachers/', views.teacher, name='teachers'),
-    path('teachers-single/<int:lecturerId>', views.teacher_single, name='teachers-single'),
-    path('teachers-rating/', views.teacher_rating, name='teachers-rating'),
+    path('updateprofile/', views.EditProfile, name='update-profile'),
+    #path('teachers/', views.teacher, name='teachers'),
+    #path('teachers-single/<int:lecturerId>', views.teacher_single, name='teachers-single'),
+    #path('teachers-rating/', views.teacher_rating, name='teachers-rating'),
 ]

@@ -9,7 +9,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from users.models import Student
 
-from .models import Enrollment, Subject, SubjectRating
+from .models import *
 
 
 def get_recommmendations(user):
@@ -25,21 +25,22 @@ def _validate(user):
     is_valid = False
     enrolled_subjects = []
     if user.is_authenticated:  # atuthenticated user
-        enrolled_subjects = get_enrolled_subjects(user.id).values_list('subject', flat=True)
+        enrolled_subjects = get_enrolled_subjects(user.id).values_list('course', flat=True)
         if enrolled_subjects.count() >= 1:
             is_valid = True
     return is_valid, enrolled_subjects
 
 
 def _from_random():
-    subjects_size = Subject.objects.count()
-    random_list = random.sample(range(0, subjects_size), 10)
+    subjects_size = Course.objects.count()
+    random_list = random.sample(range(0, subjects_size), 3)
+    print(random_list)
     recommendations = _retrieve_recommendations_and_sort_by(random_list)
     return recommendations
 
 
 def _from_content_based(subject_list):
-    df = DataFrame(list(Subject.objects.values('name', 'category__name')))
+    df = DataFrame(list(Course.objects.values('name', 'category__name')))
 
     df = _data_clean(df, subject_list)
     
@@ -116,7 +117,7 @@ def _recommendations(subject_list, df, cosine_sim):
             if subjectId not in subject_list:
                 recommended_subjects.append(subjectId)
                 real_sims.append(real_sim)
-                subject_name = Subject.objects.get(id=subjectId)
+                subject_name = Course.objects.get(id=subjectId)
                 rating_list = SubjectRating.objects.filter(subject = subject_name).values_list('rating', flat=True)
                 if(rating_list.count() > 0):
                     average_rating = sum(rating_list) / rating_list.count()
@@ -129,17 +130,16 @@ def _recommendations(subject_list, df, cosine_sim):
                 else:
                     rating = 0
 
-    print("======real_sim=====")
+    '''print("======real_sim=====")
     print(real_sims)
     print("=====Rating Result=====")
     print(rating)
-    #evaluation()
+    #evaluation()'''
     return recommended_subjects, rating
-
 
 def _retrieve_recommendations_and_sort_by(subject_list):
     # return detailed information of recommendation list
-    recommendations = list(Subject.objects.filter(pk__in=subject_list).values())
+    recommendations = list(Course.objects.filter(pk__in=subject_list).values())
     recommendations.sort(key=lambda t: subject_list.index(t['id']))
     return recommendations
 

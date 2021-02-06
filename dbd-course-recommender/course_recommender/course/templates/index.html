@@ -58,7 +58,6 @@
     <!--====== SLIDER PART ENDS ======-->
    
     <!--====== CATEGORY PART START ======-->
-    
     <section id="category-part">
         <div class="container">
             <div class="category pt-40 pb-80">
@@ -70,84 +69,56 @@
                     </div>
                     <div class="col-lg-6 offset-lg-1 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-8 offset-2">
                         <div class="row category-slide mt-40">
+                        {% for domain in domains %}
                             <div class="col-lg-4">
-                                <a href="#">
+                                <a href="{% url 'domain-view' domain.id %}">
                                     <span class="single-category text-center color-1">
                                         <span class="icon">
-                                            <img src="{% static 'images/all-icon/ctg-1.png' %}" alt="Icon">
+                                            <img src="{{domain.image.url}}" style= "width: 115px;height: 78px" alt="Icon">
                                         </span>
                                         <span class="cont">
-                                            <span>Language</span>
+                                            <span>{{domain.name}}</span>
                                         </span>
                                     </span> <!-- single category -->
                                 </a>
                             </div>
-                            <div class="col-lg-4">
-                                <a href="#">
-                                    <span class="single-category text-center color-2">
-                                        <span class="icon">
-                                            <img src="{% static 'images/all-icon/ctg-2.png' %}" alt="Icon">
-                                        </span>
-                                        <span class="cont">
-                                            <span>Business</span>
-                                        </span>
-                                    </span> <!-- single category -->
-                                </a>
-                            </div>
-                            <div class="col-lg-4">
-                                <a href="#">
-                                    <span class="single-category text-center color-3">
-                                        <span class="icon">
-                                            <img src="{% static 'images/all-icon/ctg-3.png' %}" alt="Icon">
-                                        </span>
-                                        <span class="cont">
-                                            <span>Literature</span>
-                                        </span>
-                                    </span> <!-- single category -->
-                                </a>
-                            </div>
-                            <div class="col-lg-4">
-                                <a href="#">
-                                    <span class="single-category text-center color-1">
-                                        <span class="icon">
-                                            <img src="{% static 'images/all-icon/ctg-1.png' %}" alt="Icon">
-                                        </span>
-                                        <span class="cont">
-                                            <span>Language</span>
-                                        </span>
-                                    </span> <!-- single category -->
-                                </a>
-                            </div>
-                            <div class="col-lg-4">
-                                <a href="#">
-                                    <span class="single-category text-center color-2">
-                                        <span class="icon">
-                                            <img src="{% static 'images/all-icon/ctg-2.png' %}" alt="Icon">
-                                        </span>
-                                        <span class="cont">
-                                            <span>Business</span>
-                                        </span>
-                                    </span> <!-- single category -->
-                                </a>
-                            </div>
-                            <div class="col-lg-4">
-                                <a href="#">
-                                    <span class="single-category text-center color-3">
-                                        <span class="icon">
-                                            <img src="{% static 'images/all-icon/ctg-3.png' %}" alt="Icon">
-                                        </span>
-                                        <span class="cont">
-                                            <span>Literature</span>
-                                        </span>
-                                    </span> <!-- single category -->
-                                </a>
-                            </div>
+                            {% endfor%}
                         </div> <!-- category slide -->
                     </div>
                 </div> <!-- row -->
             </div> <!-- category -->
         </div> <!-- container -->
     </section>
+    
+   <!-- <section id="category-part">
+        <div class="container">
+            <div class="category pt-40 pb-80">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="category-text pt-40">
+                            <h2>Looking for a New Course?</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 offset-lg-1 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-8 offset-2">
+                        <div class="row category-slide mt-40">
+                        {% for domain in courses %}
+                            <div class="col-lg-4">
+                                    <span class="single-category text-center color-1">
+                                        <span class="icon">
+                                            <img src="{{ domain.image.url }}" alt="Icon">
+                                        </span>
+                                        <span class="cont">
+                                            <span>{{ domain.name }}</span>
+                                        </span>
+                                    </span> 
+                            </div>
+                            {% endfor%}
+                        </div> 
+                    </div>
+                </div> 
+            </div>
+        </div> 
+    </section>-->
     
     <!--====== CATEGORY PART ENDS ======-->
    
@@ -159,7 +130,7 @@
                 <div class="col-lg-5">
                     <div class="section-title mt-50">
                         <h5>About us</h5>
-                        <h2>Welcome to Ed </h2>
+                        <h2>Welcome to EdTek </h2>
                     </div> <!-- section title -->
                     <div class="about-cont">
                         <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet . Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt  mauris. <br> <br> auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet . Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt  mauris</p>
@@ -167,10 +138,10 @@
                     </div>
                 </div> <!-- about cont -->
                 <div class="col-lg-6 offset-lg-1">
-                    <div class="about-event mt-50">
+                    <!--<div class="about-event mt-50">
                         <div class="event-title">
                             <h3>Upcoming events</h3>
-                        </div> <!-- event title -->
+                        </div> 
                         <ul>
                             <li>
                                 <div class="single-event">
@@ -197,13 +168,13 @@
                                 </div>
                             </li>
                         </ul> 
-                    </div> <!-- about event -->
+                    </div> --><!-- about event -->
                 </div>
             </div> <!-- row -->
         </div> <!-- container -->
-        <div class="about-bg">
+       <!-- <div class="about-bg">
             <img src="{% static 'images/about/bg-1.png' %}" alt="About">
-        </div>
+        </div>-->
     </section>
     
     <!--====== ABOUT PART ENDS ======-->
@@ -242,197 +213,58 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="section-title pb-45">
-                        <h5>Our course</h5>
+                        <h5>course</h5>
                         <h2>Featured courses </h2>
                     </div> <!-- section title -->
                 </div>
             </div> <!-- row -->
             <div class="row course-slide mt-30">
+                {% for course in courses%}
                 <div class="col-lg-4">
                     <div class="single-course">
                         <div class="thum">
                             <div class="image">
-                                <img src="{% static 'images/course/cu-1.jpg' %}" alt="Course">
+                                <img src="{{course.image.url}}" style= "width: 380px;height: 300px" alt="Course">
                             </div>
                             <div class="price">
-                                <span>Free</span>
+                            {% if course.cost %}
+                                <span>Free </span>
+                            {% else %}
+                            <span>Paid </span>
+                            {% endif %}
                             </div>
                         </div>
                         <div class="cont">
                             <ul>
+                            {% for i in course.ratings %}
+                                {% if i %}
+                                <li><i class="fa fa-star"></i></li>
+                                {% endif %}
+                                <!--<li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>-->
+                            {% endfor %}
                             </ul>
-                            <span>(20 Reviews)</span>
-                            <a href="courses-single.html"><h4>Learn basic javascript from start for beginner</h4></a>
+                            <a href="{% url 'courses-single' course.id %}"><h4> {{ course.name }}</h4></a>
                             <div class="course-teacher">
                                 <div class="thum">
-                                    <a href="#"><img src="{% static 'images/course/teacher/t-1.jpg' %}" alt="teacher"></a>
+                                    <img src="{{ course.platform.image.url}}" alt="teacher">
                                 </div>
                                 <div class="name">
-                                    <a href="#"><h6>Mark anthem</h6></a>
+                                    <h6>{{ course.platform.name }}</h6>
                                 </div>
                                 <div class="admin">
                                     <ul>
-                                        <li><a href="#"><i class="fa fa-user"></i><span>31</span></a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i><span>10</span></a></li>
+                                        <li><i class="fa fa-user"></i><span>{{ course.people }}</span></li>
+                                        
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div> <!-- single course -->
                 </div>
-                <div class="col-lg-4">
-                    <div class="single-course">
-                        <div class="thum">
-                            <div class="image">
-                                <img src="{% static 'images/course/cu-2.jpg' %}" alt="Course">
-                            </div>
-                            <div class="price">
-                                <span>Free</span>
-                            </div>
-                        </div>
-                        <div class="cont">
-                            <ul>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                            </ul>
-                            <span>(20 Reviews)</span>
-                            <a href="courses-single.html"><h4>Learn basic javascript from start for beginner</h4></a>
-                            <div class="course-teacher">
-                                <div class="thum">
-                                    <a href="#"><img src="{% static 'images/course/teacher/t-2.jpg' %}" alt="teacher"></a>
-                                </div>
-                                <div class="name">
-                                    <a href="#"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div class="admin">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-user"></i><span>31</span></a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i><span>10</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- single course -->
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-course">
-                        <div class="thum">
-                            <div class="image">
-                                <img src="{% static 'images/course/cu-3.jpg' %}" alt="Course">
-                            </div>
-                            <div class="price">
-                                <span>Free</span>
-                            </div>
-                        </div>
-                        <div class="cont">
-                            <ul>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                            </ul>
-                            <span>(20 Reviews)</span>
-                            <a href="courses-single.html"><h4>Learn basic javascript from start for beginner</h4></a>
-                            <div class="course-teacher">
-                                <div class="thum">
-                                    <a href="#"><img src="{% static 'images/course/teacher/t-3.jpg' %}" alt="teacher"></a>
-                                </div>
-                                <div class="name">
-                                    <a href="#"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div class="admin">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-user"></i><span>31</span></a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i><span>10</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- single course -->
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-course">
-                        <div class="thum">
-                            <div class="image">
-                                <img src="{% static 'images/course/cu-4.jpg' %}" alt="Course">
-                            </div>
-                            <div class="price">
-                                <span>Free</span>
-                            </div>
-                        </div>
-                        <div class="cont">
-                            <ul>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                            </ul>
-                            <span>(20 Reviews)</span>
-                            <a href="courses-single.html"><h4>Learn basic javascript from start for beginner</h4></a>
-                            <div class="course-teacher">
-                                <div class="thum">
-                                    <a href="#"><img src="{% static 'images/course/teacher/t-4.jpg' %}" alt="teacher"></a>
-                                </div>
-                                <div class="name">
-                                    <a href="#"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div class="admin">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-user"></i><span>31</span></a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i><span>10</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- single course -->
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-course">
-                        <div class="thum">
-                            <div class="image">
-                                <img src="{% static 'images/course/cu-5.jpg' %}" alt="Course">
-                            </div>
-                            <div class="price">
-                                <span>Free</span>
-                            </div>
-                        </div>
-                        <div class="cont">
-                            <ul>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                            </ul>
-                            <span>(20 Reviews)</span>
-                            <a href="courses-single.html"><h4>Learn basic javascript from start for beginner</h4></a>
-                            <div class="course-teacher">
-                                <div class="thum">
-                                    <a href="#"><img src="{% static 'images/course/teacher/t-5.jpg' %}" alt="teacher"></a>
-                                </div>
-                                <div class="name">
-                                    <a href="#"><h6>Mark anthem</h6></a>
-                                </div>
-                                <div class="admin">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-user"></i><span>31</span></a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i><span>10</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- single course -->
-                </div>
+                {% endfor%}
             </div> <!-- course slide -->
         </div> <!-- container -->
     </section>
@@ -506,11 +338,10 @@
                 <div class="col-lg-5">
                     <div class="section-title mt-50">
                         <h5>Featured Platfoms</h5>
-                        <h2>Our Platfoms</h2>
+                        <h2>Platfoms</h2>
                     </div> <!-- section title -->
                     <div class="teachers-cont">
                         <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet . Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt  mauris. <br> <br> auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet . Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt  mauris</p>
-                        <a href="#" class="main-btn mt-55">Career with us</a>
                     </div> <!-- teachers cont -->
                 </div>
                 <div class="col-lg-6 offset-lg-1">
@@ -519,10 +350,10 @@
                             <div class="col-sm-6">
                                 <div class="single-teachers mt-30 text-center">
                                     <div class="image">
-                                        <img src="{% static 'images/teachers/t-1.jpg' %}" alt="Teachers">
+                                        <img src="{% static 'images/teachers/t-1.jpg' %}" style= "width: 200px;height: 200px" alt="Teachers">
                                     </div>
                                     <div class="cont">
-                                        <a href="teachers-single.html"><h6>Platform A</h6></a>
+                                        
                                         <span>Udacity</span>
                                     </div>
                                 </div> <!-- single teachers -->
@@ -530,10 +361,10 @@
                             <div class="col-sm-6">
                                 <div class="single-teachers mt-30 text-center">
                                     <div class="image">
-                                        <img src="{% static 'images/teachers/t-2.jpg' %}" alt="Teachers">
+                                        <img src="{% static 'images/teachers/t-2.jpg' %}" style= "width: 200px;height: 200px" alt="Teachers">
                                     </div>
                                     <div class="cont">
-                                        <a href="teachers-single.html"><h6>Platform B</h6></a>
+                                        
                                         <span>EDX</span>
                                     </div>
                                 </div> <!-- single teachers -->
@@ -541,10 +372,10 @@
                             <div class="col-sm-6">
                                 <div class="single-teachers mt-30 text-center">
                                     <div class="image">
-                                        <img src="{% static 'images/teachers/t-3.jpg' %}" alt="Teachers">
+                                        <img src="{% static 'images/teachers/t-3.jpg' %}" style= "width: 200px;height: 200px" alt="Teachers">
                                     </div>
                                     <div class="cont">
-                                        <a href="teachers-single.html"><h6>Platform C</h6></a>
+                                        
                                         <span>Udemy</span>
                                     </div>
                                 </div> <!-- single teachers -->
@@ -552,11 +383,11 @@
                             <div class="col-sm-6">
                                 <div class="single-teachers mt-30 text-center">
                                     <div class="image">
-                                        <img src="{% static 'images/teachers/t-1.jpg' %}" alt="Teachers">
+                                        <img src="{% static 'images/teachers/t-1.jpg' %}" style= "width: 200px;height: 200px" alt="Teachers">
                                     </div>
                                     <div class="cont">
-                                        <a href="teachers-single.html"><h6>Platform D</h6></a>
-                                        <span>Udacity</span>
+                                        
+                                        <span>COURSERA</span>
                                     </div>
                                 </div> <!-- single teachers -->
                             </div>
@@ -700,16 +531,16 @@
    
     <!--====== TEASTIMONIAL PART START ======-->
     
-    <section id="testimonial" class="bg_cover pt-115 pb-115" data-overlay="8" style="background-image: url('/static/images/bg-2.jpg')">
+    <!--<section id="testimonial" class="bg_cover pt-115 pb-115" data-overlay="8" style="background-image: url('/static/images/bg-2.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="section-title pb-40">
                         <h5>Testimonial</h5>
                         <h2>What they say</h2>
-                    </div> <!-- section title -->
+                    </div> 
                 </div>
-            </div> <!-- row -->
+            </div> 
             <div class="row testimonial-slide mt-40">
                 <div class="col-lg-6">
                     <div class="single-testimonial">
@@ -724,7 +555,7 @@
                             <h6>Rubina Helen</h6>
                             <span>Bsc, Engineering</span>
                         </div>
-                    </div> <!-- single testimonial -->
+                    </div> 
                 </div>
                 <div class="col-lg-6">
                     <div class="single-testimonial">
@@ -739,7 +570,7 @@
                             <h6>Rubina Helen</h6>
                             <span>Bsc, Engineering</span>
                         </div>
-                    </div> <!-- single testimonial -->
+                    </div> 
                 </div>
                 <div class="col-lg-6">
                     <div class="single-testimonial">
@@ -754,11 +585,11 @@
                             <h6>Rubina Helen</h6>
                             <span>Bsc, Engineering</span>
                         </div>
-                    </div> <!-- single testimonial -->
+                    </div> 
                 </div>
-            </div> <!-- testimonial slide -->
-        </div> <!-- container -->
-    </section>
+            </div> 
+        </div> 
+    </section>-->
     
     <!--====== TEASTIMONIAL PART ENDS ======-->
    

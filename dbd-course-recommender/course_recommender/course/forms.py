@@ -1,5 +1,5 @@
 from django import forms
-from .models import Enrollment
+from .models import *
 
 
 class CourseEnrollForm(forms.ModelForm):
@@ -8,7 +8,7 @@ class CourseEnrollForm(forms.ModelForm):
 
     class Meta:
         model = Enrollment
-        fields = ['subject', 'student', 'status']
+        fields = ['student', 'status']
 
 
 class CourseDismissForm(forms.ModelForm):
@@ -16,4 +16,9 @@ class CourseDismissForm(forms.ModelForm):
 
     class Meta:
         model = Enrollment
-        fields = ['subject', 'student']
+        fields = ['course', 'student']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = SubjectRating
+        fields = [ 'rating', 'comment']

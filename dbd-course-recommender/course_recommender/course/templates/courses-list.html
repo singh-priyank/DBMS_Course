@@ -57,35 +57,43 @@
                         <div class="single-course mt-30">
                             <div class="thum">
                                 <div class="image">
-                                    <img src="/static/images/course/cu-{{ forloop.counter }}.jpg" alt="Course">
+                                    <img src="{{course.image.url}}" style= "width: 380px;height: 300px" alt="Course">
                                 </div>
                                 <div class="price">
-                                    <span>Free</span>
+                                    {% if course.cost %}
+                                <span>Free </span>
+                            {% else %}
+                            <span>Paid </span>
+                            {% endif %}
                                 </div>
                             </div>
                             <div class="cont">
                                 <ul>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
+                                {% for i in course.ratings %}
+                                {% if i %}
+                                <li><i class="fa fa-star"></i></li>
+                                {% endif %}
+                                <!--<li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>-->
+                            {% endfor %}
                                 </ul>
-                                <span>({% random_int 1000 %} Reviews)</span>
                                 <a href="{% url 'courses-single' course.id %}"><h4>{{ course.name }}</h4></a>
                                 <div class="course-teacher">
+
                                     <div class="thum">
-                                        <a href="#"><img src="{% static  'images/course/teacher/t-1.jpg' %}" alt="teacher"></a>
-                                    </div>
+                                    <img src="{{ course.platform.image.url}}" alt="teacher">
+                                </div>
                                     <div class="name">
-                                        <a href="#"><h6>Mark anthem</h6></a>
-                                    </div>
-                                    <div class="admin">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-user"></i><span>{% random_int 100 %}</span></a></li>
-                                            <li><a href="#"><i class="fa fa-heart"></i><span>{% random_int 100 %}</span></a></li>
-                                        </ul>
-                                    </div>
+                                    <h6>{{ course.platform.name }}</h6>
+                                </div>
+                                <div class="admin">
+                                    <ul>
+                                        <li><i class="fa fa-user"></i><span>{{ course.people }}</span></li>
+                                        
+                                    </ul>
+                                </div>
                                 </div>
                             </div>
                         </div> <!-- single course -->

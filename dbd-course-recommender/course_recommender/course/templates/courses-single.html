@@ -22,12 +22,11 @@
                                 <li>
                                     <div class="teacher-name">
                                         <div class="thum">
-                                            <img src="{% static 'images/course/teacher/t-1.jpg' %}" alt="Teacher">
-                                        </div>
-                                        <div class="name">
-                                            <span>Teacher</span>
-                                            <h6>Mark anthem</h6>
-                                        </div>
+                                    <img src="{{ course.platform.image.url}}" alt="teacher">
+                                </div>
+                                    <div class="name">
+                                    <h6>{{ course.platform.name }}</h6>
+                                </div>
                                     </div>
                                 </li>
                                 <li>
@@ -40,12 +39,16 @@
                                     <div class="review">
                                         <span>Review</span>
                                         <ul>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li class="rating">({% random_int 1000 %} Reviews)</li>
+                                            {% for i in course.ratings %}
+                                {% if i %}
+                                <li><i class="fa fa-star"></i></li>
+                                {% endif %}
+                                            <!--<li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>-->
+                                            {% endfor %}
+                                            <li class="rating">({{course.people}} Reviews)</li>
                                         </ul>
                                     </div>
                                 </li>
@@ -53,7 +56,7 @@
                         </div> <!-- course terms -->
                         
                         <div class="courses-single-image pt-50">
-                            <img src="{% static 'images/course/cu-1.jpg' %}" alt="Courses">
+                            <img src="{{course.image.url}}" style= "width: 400px;height: 300px" alt="Courses">
                         </div> <!-- courses single image -->
                         
                         <div class="courses-tab mt-30">
@@ -61,9 +64,9 @@
                                 <li class="nav-item">
                                     <a class="active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
                                 </li>
-                                <li class="nav-item">
+                               <!-- <li class="nav-item">
                                     <a id="curriculum-tab" data-toggle="tab" href="#curriculum" role="tab" aria-controls="curriculum" aria-selected="false">Curriculum</a>
-                                </li>
+                                </li>-->
                                 <li class="nav-item">
                                     <a id="instructor-tab" data-toggle="tab" href="#instructor" role="tab" aria-controls="instructor" aria-selected="false">Instructor</a>
                                 </li>
@@ -76,16 +79,16 @@
                                 <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                                     <div class="overview-description">
                                         <div class="single-description pt-40">
-                                            <h6>Course Summery</h6>
-                                            <p>{{course.description}}</p>
+                                            <h6>Course Summary</h6>
+                                            <p>{{course.course_describtion}}</p>
                                         </div>
                                         <div class="single-description pt-40">
-                                            <h6>Requrements</h6>
-                                            <p>{{course.description}}</p>
+                                            <h6>Requirements</h6>
+                                            <p>Language : {{course.language}}</p>
                                         </div>
                                     </div> <!-- overview description -->
                                 </div>
-                                <div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum-tab">
+                                <!--<div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum-tab">
                                     <div class="curriculum-cont">
                                         <div class="title">
                                             <h6>Learn basic javascript Lecture Started</h6>
@@ -219,17 +222,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> <!-- curriculum cont -->
-                                </div>
+                                    </div> 
+                                </div>-->
                                 <div class="tab-pane fade" id="instructor" role="tabpanel" aria-labelledby="instructor-tab">
                                     <div class="instructor-cont">
                                         <div class="instructor-author">
                                             <div class="author-thum">
-                                                <img src="{% static 'images/instructor/i-1.jpg' %}" alt="Instructor">
+                                                <img src="{{course.platform.image.url}}" style= "width: 180px;height: 180px" alt="Instructor">
                                             </div>
                                             <div class="author-name">
-                                                <a href="#"><h5>John Doe</h5></a>
-                                                <span>Senior WordPress Developer</span>
+                                                <a href="#"><h5>{{course.instructor}}</h5></a>
                                                 <ul class="social">
                                                     <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
                                                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -238,103 +240,57 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="instructor-description pt-25">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus fuga ratione molestiae unde provident quibusdam sunt, doloremque. Error omnis mollitia, ex dolor sequi. Et, quibusdam excepturi. Animi assumenda, consequuntur dolorum odio sit inventore aliquid, optio fugiat alias. Veritatis minima, dicta quam repudiandae repellat non sit, distinctio, impedit, expedita tempora numquam?</p>
-                                        </div>
                                     </div> <!-- instructor cont -->
                                 </div>
                                 <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                                     <div class="reviews-cont">
                                         <div class="title">
-                                            <h6>Student Reviews</h6>
+                                            <h6>Student Reviews <li class="rating">({{ course.people}} Reviews)</li></h6>
                                         </div>
                                         <ul>
+                                        {% for review in reviews%}
                                            <li>
                                                <div class="single-reviews">
                                                     <div class="reviews-author">
                                                         <div class="author-thum">
-                                                            <img src="{% static 'images/review/r-1.jpg' %}" alt="Reviews">
+                                                            <img {% if review.student.image %}src="{{ review.student.image.url }}" {% else %} src="{% static 'images/course/teacher/t-1.jpg' %}"{% endif %} style= "width: 80px;height: 80px"alt="Reviews">
                                                         </div>
                                                         <div class="author-name">
-                                                            <h6>Bobby Aktar</h6>
-                                                            <span>April 03, 2019</span>
+                                                            <h6>{{review.student.account.username}}</h6>
+                                                            <span>{{review.timestamp}}</span>    
+
                                                         </div>
                                                     </div>
                                                     <div class="reviews-description pt-20">
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which.</p>
+                                                        <p>{{review.comment}}</p>
                                                         <div class="rating">
                                                             <ul>
+                                                                {% for i in review.ratings %}
+                                                                    {% if i %}
+                                                                    <li><i class="fa fa-star"></i></li>
+                                                                    {% endif %}
+                                                                <!--<li><i class="fa fa-star"></i></li>
                                                                 <li><i class="fa fa-star"></i></li>
                                                                 <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>-->
+                                                            {% endfor %}
                                                             </ul>
                                                             <span>/ 5 Star</span>
+                                                        
                                                         </div>
                                                     </div>
                                                 </div> <!-- single reviews -->
                                            </li>
-                                           <li>
-                                               <div class="single-reviews">
-                                                    <div class="reviews-author">
-                                                        <div class="author-thum">
-                                                            <img src="{% static 'images/review/r-2.jpg' %}" alt="Reviews">
-                                                        </div>
-                                                        <div class="author-name">
-                                                            <h6>Humayun Ahmed</h6>
-                                                            <span>April 13, 2019</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="reviews-description pt-20">
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which.</p>
-                                                        <div class="rating">
-                                                            <ul>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                            </ul>
-                                                            <span>/ 5 Star</span>
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- single reviews -->
-                                           </li>
-                                           <li>
-                                               <div class="single-reviews">
-                                                    <div class="reviews-author">
-                                                        <div class="author-thum">
-                                                            <img src="{% static 'images/review/r-3.jpg' %}" alt="Reviews">
-                                                        </div>
-                                                        <div class="author-name">
-                                                            <h6>Tania Aktar</h6>
-                                                            <span>April 20, 2019</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="reviews-description pt-20">
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which.</p>
-                                                        <div class="rating">
-                                                            <ul>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                                <li><i class="fa fa-star"></i></li>
-                                                            </ul>
-                                                            <span>/ 5 Star</span>
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- single reviews -->
-                                           </li>
+                                           {% endfor %}
                                         </ul>
                                         <div class="title pt-15">
                                             <h6>Leave A Comment</h6>
                                         </div>
                                         <div class="reviews-form">
-                                            <form action="#">
+                                            <form action="/courses-single/{{ course.id }}"  method="post">
+                                            {% csrf_token %}
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <!--<div class="col-md-6">
                                                         <div class="form-single">
                                                             <input type="text" placeholder="Fast name">
                                                         </div>
@@ -343,29 +299,29 @@
                                                         <div class="form-single">
                                                             <input type="text" placeholder="Last Name">
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                     <div class="col-lg-12">
                                                         <div class="form-single">
                                                             <div class="rate-wrapper">
                                                                 <div class="rate-label">Your Rating:</div>
                                                                 <div class="rate">
-                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
+                                                                    <div class="rate-item"><input type="radio" id="5-star" name="rating" value="1" /><label><i class="fa fa-star" aria-hidden="true"></i></label></div>
+                                                                    <div class="rate-item"><input type="radio" id="5-star" name="rating" value="2" /><label><i class="fa fa-star" aria-hidden="true"></i></label></div>
+                                                                    <div class="rate-item"><input type="radio" id="5-star" name="rating" value="3" /><label><i class="fa fa-star" aria-hidden="true"></i></label></div>
+                                                                    <div class="rate-item"><input type="radio" id="5-star" name="rating" value="4" /><label><i class="fa fa-star" aria-hidden="true"></i></label></div>
+                                                                    <div class="rate-item"><input type="radio" id="5-star" name="rating" value="5" /><label><i class="fa fa-star" aria-hidden="true"></i></label></div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <div class="form-single">
-                                                            <textarea placeholder="Comment"></textarea>
+                                                        <div class="form-group">
+                                                            {{ form.comment }}
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="form-single">
-                                                            <button type="button" class="main-btn">Post Comment</button>
+                                                            <button type="submit" class="main-btn">Post Comment</button>
                                                         </div>
                                                     </div>
                                                 </div> <!-- row -->
@@ -378,82 +334,41 @@
                     </div> <!-- courses single left -->
                     
                 </div>
-                <div class="col-lg-4">
+            <div class="col-lg-4">
                     <div class="row">
                         <div class="col-lg-12 col-md-6">
                             <div class="course-features mt-30">
                                <h4>Course Features </h4>
                                 <ul>
-                                    <li><i class="fa fa-clock-o"></i>Duaration : <span>10 Hours</span></li>
-                                    <li><i class="fa fa-clone"></i>Leactures : <span>09</span></li>
-                                    <li><i class="fa fa-beer"></i>Quizzes :  <span>05</span></li>
-                                    <li><i class="fa fa-user-o"></i>Students :  <span>100</span></li>
+                                    <li><i class="fa fa-clock-o"></i>Hours to complete : <span>{{course.duration}}</span></li>
+                                    <li><i class="fa fa-clone"></i>Language : <span>{{course.language}}</span></li>
+                                    <li><i class="fa fa-clone"></i>Level :  <span>{{course.level}}</span></li>
+                                    <li><i class="fa fa-clone"></i>certifiacte :  <span>{% if course.certificate %}<span>Available </span>{% else %}<span>Not Available </span>{% endif %}</span></li>
+                                    <li><i class="fa fa-clone"></i>Platform :  <span>{{course.platform.name}}</span></li>
+                                    <li><i class="fa fa-clone"></i>cost : <span>{% if course.cost %}<span>Free </span>{% else %}<span>Paid </span>{% endif %}</span></li>
                                 </ul>
                                 {% if user.is_authenticated and is_enrolled %}
                                 <form action="{% url 'course-dismiss' %}" method="POST">
                                     {% csrf_token %}
-                                    <input type="hidden" name="subject" value="{{ course.id }}"/>
+                                    <input type="hidden" name="course" value="{{ course.id }}"/>
                                     <div class="price-button pt-10">
                                         <span>Enrolled</span>
                                         <button type="submit" class="main-btn">Dismiss Now</a>
                                     </div>
                                 </form>
                                 {% else %}
-                                <form action="{% url 'course-enroll' %}" method="POST">
+                                <form action="{% url 'course-enroll' course.id %}" method="POST">
                                     {% csrf_token %}
-                                    <input type="hidden" name="subject" value="{{ course.id }}"/>
+                                    <input type="hidden" name="course" value="{{ course.id }}"/>
                                     <div class="price-button pt-10">
-                                        <span>Remain : <b>{% random_int 100 %}</b></span>
                                         <button type="submit" class="main-btn">Enroll Now</a>
                                     </div>
                                 </form>
                                 {% endif %}
                             </div> <!-- course features -->
+                        </div>       
                         </div>
-                        <div class="col-lg-12 col-md-6">
-                            <div class="You-makelike mt-30">
-                                <h4>You make like </h4> 
-                                <div class="single-makelike mt-20">
-                                    <div class="image">
-                                        <img src="{% static 'images/your-make/y-1.jpg'%}" alt="Image">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="#"><h4>Introduction to machine languages</h4></a>
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-user"></i>31</a></li>
-                                            <li>$50</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="single-makelike mt-20">
-                                    <div class="image">
-                                        <img src="{% static 'images/your-make/y-1.jpg'%}" alt="Image">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="#"><h4>How to build a basic game with java </h4></a>
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-user"></i>31</a></li>
-                                            <li>$50</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="single-makelike mt-20">
-                                    <div class="image">
-                                        <img src="{% static 'images/your-make/y-1.jpg' %}" alt="Image">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="#"><h4>Basic accounting from primary</h4></a>
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-user"></i>31</a></li>
-                                            <li>$50</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- row -->
+                        </div></div>       
             <div class="row">
                 <div class="col-lg-8">
                     <div class="related-courses pt-95">
@@ -466,34 +381,35 @@
                                 <div class="single-course mt-30">
                                     <div class="thum">
                                         <div class="image">
-                                            <img src="/static/images/course/cu-{{ forloop.counter }}.jpg" alt="Course">
+                                            <img src="{{course_rd.image.url}}" style= "width: 380px;height: 300px" alt="Course">
                                         </div>
                                         <div class="price">
-                                            <span>Free</span>
+                                            {% if course_rd.cost %}
+                                <span>Free </span>
+                            {% else %}
+                            <span>Paid </span>
+                            {% endif %}
                                         </div>
                                     </div>
                                     <div class="cont">
                                         <ul>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
+                                             {% for i in course_rd.ratings %}
+                                {% if i %}
+                                <li><i class="fa fa-star"></i></li>
+                                {% endif %}
+                                <!--<li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>-->
+                            {% endfor %}
                                         </ul>
-                                        <span>({% random_int 1000 %} Reviews)</span>
                                         <a href="{% url 'courses-single' course_rd.id %}"><h4>{{ course_rd.name }}</h4></a>
                                         <div class="course-teacher">
                                             <div class="thum">
-                                                <a href="#"><img src="/static/images/course/teacher/t-{{ forloop.counter }}.jpg" alt="teacher"></a>
+                                            <img src="{{ course_rd.platform.image.url}}" alt="teacher">
                                             </div>
                                             <div class="name">
-                                                <a href="#"><h6>Mark anthem</h6></a>
-                                            </div>
-                                            <div class="admin">
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-user"></i><span>{% random_int 100 %}</span></a></li>
-                                                    <li><a href="#"><i class="fa fa-heart"></i><span>{% random_int 100 %}</span></a></li>
-                                                </ul>
+                                                <ah6>{{ course_rd.platform.name }}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -503,6 +419,7 @@
                         </div> <!-- row -->
                     </div> <!-- related courses -->
                 </div>
+                
             </div> <!-- row -->
         </div> <!-- container -->
     </section>

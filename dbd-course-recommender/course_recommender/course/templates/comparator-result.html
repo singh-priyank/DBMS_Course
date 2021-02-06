@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!--====== SEARCH BOX PART ENDS ======-->
+
+    <section id="page-banner" class="pt-105 pb-110 bg_cover" data-overlay="8" style="background-image: url('/static/images/page-banner-1.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-banner-cont">
+                        <h2>Comparator</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'course-home' %}">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Comparator</li>
+                            </ol>
+                        </nav>
+                    </div>  <!-- page banner cont -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+
+
+    <div class="container">
+    
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                
+                <div class="course-features mt-30">
+                    <h4>{{course1.name}}</h4>
+                    <ul>
+                        <li><i class="fa fa-clock-o"></i>Hours to complete : <span>{{course1.duration}}</span></li>
+                            <li><i class="fa fa-clone"></i>Language : <span>{{course1.language}}</span></li>
+                            <li><i class="fa fa-clone"></i>Level :  <span>{{course1.level}}</span></li>
+                            <li><i class="fa fa-clone"></i>certifiacte :  <span>{% if course1.certificate %}<span>Available </span>{% else %}<span>Not Available </span>{% endif %}</span></li>
+                            <li><i class="fa fa-clone"></i>Platform :  <span>{{course1.platform.name}}</span></li>
+                            <li><i class="fa fa-clone"></i>cost : <span>{% if course1.cost %}<span>Free </span>{% else %}<span>Paid </span>{% endif %}</span></li>
+                            <li><i class="fa fa-clone"></i>Instructor : <span>{{course1.instructor}}</span></li>
+                            <li><i class="fa fa-clone"></i>Category : <span>{{course1.category}}</span></li>
+                    </ul>
+                    
+                </div> <!-- course features -->
+            </div>
+            <div class="col-lg-6 col-md-6">
+                
+                <div class="course-features mt-30">
+                   <h4>{{course2.name}}</h4>
+                    <ul>
+                        <li><i class="fa fa-clock-o"></i>Hours to complete : <span>{{course2.duration}}</span></li>
+                            <li><i class="fa fa-clone"></i>Language : <span>{{course2.language}}</span></li>
+                            <li><i class="fa fa-clone"></i>Level :  <span>{{course2.level}}</span></li>
+                            <li><i class="fa fa-clone"></i>certifiacte :  <span>{% if course2.certificate %}<span>Available </span>{% else %}<span>Not Available </span>{% endif %}</span></li>
+                            <li><i class="fa fa-clone"></i>Platform :  <span>{{course2.platform.name}}</span></li>
+                            <li><i class="fa fa-clone"></i>cost : <span>{% if course2.cost %}<span>Free </span>{% else %}<span>Paid </span>{% endif %}</span></li>
+                            <li><i class="fa fa-clone"></i>Instructor : <span>{{course2.instructor}}</span></li>
+                            <li><i class="fa fa-clone"></i>Category : <span>{{course2.category}}</span></li>
+                    </ul>
+                    
+                </div> <!-- course features -->
+            </div>
+        </div>
+    </div> <!-- row -->
+
+{% endblock content %}
