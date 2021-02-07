@@ -4,7 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
-
+from course.models import *
+from course.services import get_enrolled_subjects, get_recommmendations
 from .forms import  *
 from .models import Student
 
@@ -29,7 +30,8 @@ def register(request):
 def profile(request):
     account = get_object_or_404(Student, account = request.user)
     context = {'home_page': 'active',
-                'account' : account }
+                'account' : account,
+                 }
     return render(request, 'users/profile.html', context)
 
 @login_required

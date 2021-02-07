@@ -27,10 +27,18 @@
     
         <div class="row">
             <div class="col-lg-6 col-md-6">
-                
                 <div class="course-features mt-30">
-                    <h4>{{course1.name}}</h4>
+                   <a href="{% url 'courses-single' course1.id %}">
+                            {{ course1.name }}
+                    </a>    
                     <ul>
+                        
+                            <li><i class="fa fa-clone"></i>Rating : <span>{% for i in course1.ratings %}
+                                {% if i %}
+                                <i class="fa fa-star"></i>
+                                {% endif %}
+                            {% endfor %}</span></li>
+                            <li><i class="fa fa-clone"></i>People enrolled: <span>{{course1.people}}</span></li>
                         <li><i class="fa fa-clock-o"></i>Hours to complete : <span>{{course1.duration}}</span></li>
                             <li><i class="fa fa-clone"></i>Language : <span>{{course1.language}}</span></li>
                             <li><i class="fa fa-clone"></i>Level :  <span>{{course1.level}}</span></li>
@@ -39,6 +47,7 @@
                             <li><i class="fa fa-clone"></i>cost : <span>{% if course1.cost %}<span>Free </span>{% else %}<span>Paid </span>{% endif %}</span></li>
                             <li><i class="fa fa-clone"></i>Instructor : <span>{{course1.instructor}}</span></li>
                             <li><i class="fa fa-clone"></i>Category : <span>{{course1.category}}</span></li>
+                            
                     </ul>
                     
                 </div> <!-- course features -->
@@ -46,8 +55,16 @@
             <div class="col-lg-6 col-md-6">
                 
                 <div class="course-features mt-30">
-                   <h4>{{course2.name}}</h4>
+                   <a href="{% url 'courses-single' course2.id %}">
+                            {{ course2.name }}
+                        </a>
                     <ul>
+                            <li><i class="fa fa-clone"></i>Rating : <span>{% for i in course2.ratings %}
+                                {% if i %}
+                                <i class="fa fa-star"></i>
+                                {% endif %}
+                            {% endfor %}</span></li>
+                            <li><i class="fa fa-clone"></i>People enrolled: <span>{{course2.people}}</span></li>
                         <li><i class="fa fa-clock-o"></i>Hours to complete : <span>{{course2.duration}}</span></li>
                             <li><i class="fa fa-clone"></i>Language : <span>{{course2.language}}</span></li>
                             <li><i class="fa fa-clone"></i>Level :  <span>{{course2.level}}</span></li>

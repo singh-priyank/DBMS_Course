@@ -21,10 +21,20 @@
         </div> <!-- row -->
     </div> <!-- container -->
 </section>
+<div class="container">
+    
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                
+                <div class="course-features mt-30">
 <form method='POST' enctype="multipart/form-data">
     {%csrf_token%}
     {{u_form|crispy}}
     {{p_form|crispy}}
-    <button type='submit'>Update</button>
+    <button type='submit' class="main-btn mt-55">Update</button>
 </form>
+</div>
+</div>
+</div>
+</div>
 {% endblock content %}

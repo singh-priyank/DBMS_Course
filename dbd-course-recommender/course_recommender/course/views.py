@@ -120,7 +120,7 @@ def courses_cf(request):
         l2=[]
         for sub in subs:
             l2 +=list(Course.objects.filter(instructor = sub.course.instructor))
-            l2 +=list(Course.objects.filter(cost = sub.cost))
+            #l2 +=list(Course.objects.filter(cost = sub.cost))
             l2 +=list(Course.objects.filter(platform = sub.course.platform))
             l2 +=list(Course.objects.filter(language = sub.course.language))
             l2 +=list(Course.objects.filter(level = sub.course.level))
@@ -175,8 +175,8 @@ def course_single(request, course_id):
     l4 +=list(Course.objects.filter(language = course.language))
     l4 +=list(Course.objects.filter(level = course.level))
     recommmend_list =list(set(l1+l2+l4+l3))
-    random_items = [recommmend_list[random.randrange(len(recommmend_list))]
-                    for item in range(2)]
+    random_items = set([recommmend_list[random.randrange(len(recommmend_list))]
+                    for item in range(2)])
     context = {
         'courses_page': 'active',
         'course': course,
