@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+User._meta.get_field('email')._unique = True
 # name, email, last_login are in auth_user
 class Student(models.Model):
     GENDER_CHOICES = (

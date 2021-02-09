@@ -166,8 +166,16 @@ def course_single(request, course_id):
     is_enrolled = False
     if request.user.is_authenticated:  #atuthenticated user
         enrolled_course_list = get_enrolled_subjects(request.user.id)
-        if course in enrolled_course_list:
-            is_enrolled = True
+        #is_enrolled = True
+        print(enrolled_course_list)
+        print(course)
+        for c in enrolled_course_list:
+            print(c)
+            if c.course == course:
+                is_enrolled = True
+                
+        #if course.id in list(c.id for c in enrolled_course_list):
+            #is_enrolled = True
     l1 = list(Course.objects.filter(category = course.category))
     l2 =list(Course.objects.filter(instructor = course.instructor))
     l3 =list(Course.objects.filter(cost = course.cost))

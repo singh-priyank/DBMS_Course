@@ -348,7 +348,7 @@
                                     <li><i class="fa fa-clone"></i>cost : <span>{% if course.cost %}<span>Free </span>{% else %}<span>Paid </span>{% endif %}</span></li>
                                 </ul>
                                 {% if user.is_authenticated and is_enrolled %}
-                                <form action="{% url 'course-dismiss' %}" method="POST">
+                                <form action="{% url 'course-dismiss'%}" method="POST">
                                     {% csrf_token %}
                                     <input type="hidden" name="course" value="{{ course.id }}"/>
                                     <div class="price-button pt-10">
