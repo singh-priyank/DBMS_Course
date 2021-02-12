@@ -3,10 +3,32 @@ import random
 import numpy as np  # linear algebra
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
-
+from .services import get_enrolled_subjects, get_recommmendations
 from .models import *
 from .services import (_from_random, _retrieve_recommendations_and_sort_by,
                        _validate)
+
+def get_recommendations(uid):
+    subs = get_enrolled_subjects(uid)
+    if len(subs) == 0:
+        recommmend_list = list(Course.objects.all())
+    else:
+        l1=[]
+        cats=[sub.course.category for sub in subs]
+        for cat in cats:
+            l1 += list(Course.objects.filter(category = cat))
+            l1=list(set(l1))
+        l2=[]
+        for sub in subs:
+            l2 +=list(Course.objects.filter(instructor = sub.course.instructor))
+            l2 +=list(Course.objects.filter(cost = sub.course.cost))
+            l2 +=list(Course.objects.filter(platform = sub.course.platform))
+            l2 +=list(Course.objects.filter(language = sub.course.language))
+            l2 +=list(Course.objects.filter(level = sub.course.level))
+            l2 +=list(Course.objects.filter(certificate = sub.course.certificate))
+            l2=list(set(l2))
+        recommmend_list = list(set(l1+l2))
+    return recommmend_list
 
 
 def get_recommmendations_cf(user):
@@ -19,11 +41,8 @@ def get_recommmendations_cf(user):
 
 
 def _from_collaborative_filtering(enrolled_subjects):
-
-    print("==========collaborative filtering begin==========")
     ratings = pd.DataFrame(
         list(SubjectRating.objects.values()))  # .values('rating')
-    print(ratings.head(15))
 
     enrolledSubjectId = enrolled_subjects[len(enrolled_subjects)-1]
 
@@ -36,13 +55,11 @@ def _from_collaborative_filtering(enrolled_subjects):
     ratings_matrix = ratings.pivot_table(index=['subject_id'], columns=[
                                          'student_id'], values='rating').reset_index(drop=True)
     ratings_matrix.fillna(0, inplace=True)
-    print(ratings_matrix.head(15))
 
     subject_similarity = cosine_similarity(ratings_matrix)
     np.fill_diagonal(subject_similarity, 0)
 
     ratings_matrix = pd.DataFrame(subject_similarity)
-    print(ratings_matrix.head(15))
 
     # initializing the empty list of recommended subjects
     recommended_subjects = []
@@ -59,9 +76,6 @@ def _from_collaborative_filtering(enrolled_subjects):
         if subjectId not in enrolled_subjects:
             recommended_subjects.append(subjectId)
 
-    print("==========recommended subjects==========")
-    print(recommended_subjects)
     recommendations = _retrieve_recommendations_and_sort_by(
         recommended_subjects)
-    print("==========collaborative filtering end==========")
     return recommendations

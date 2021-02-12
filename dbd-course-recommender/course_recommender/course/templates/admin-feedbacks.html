@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<br>
+<div class="container">
+<div class="row">
+{% for fb in fbs %}
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">name : {{fb.name}}</h5>
+		<p class="card-text">rating : {{fb.rating}}</p>
+        <p class="card-text">{{fb.comment}}</p>
+		<p class="card-text">email : {{fb.email}}</p>
+		<p class="card-text">{{fb.date}}</p>
+
+      </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+</div>
+  <br>
+
+{% endblock %}

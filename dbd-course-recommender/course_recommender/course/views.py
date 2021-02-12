@@ -8,18 +8,21 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
-
+from pymongo import *
 from users.models import Student
 
-from .cfService import get_recommmendations_cf
+from .cfService import get_recommmendations_cf, get_recommendations
 from .forms import CourseDismissForm, CourseEnrollForm, CommentForm
 from .models import *
-from .services import get_enrolled_subjects, get_recommmendations
+from .services import get_enrolled_subjects, get_recommmendations,get_recommendations_cf
 
+from datetime import datetime
+
+client = MongoClient('mongodb+srv://sami:samiassadi279@cluster0.ytj9s.mongodb.net/course_recommender?retryWrites=true&w=majority')
 
 def home(request):
     domains = Domain.objects.all()
-    courses = Course.objects.all().order_by('name')[:3]
+    courses = Course.objects.all().order_by('name')[:5]
     context = {'home_page': 'active',
                'domains' : domains ,
                'courses': courses,
@@ -35,6 +38,41 @@ def about(request):
                'courses': courses,
                }
     return render(request, 'index.html', context)
+
+def feedback(request):
+    db = client.get_database('course_recommender')
+    if request.method =='GET':
+        return render(request, 'feedback.html')
+
+    if request.user.is_authenticated:
+        current_student = Student.objects.get(account=request.user.id)
+        fb= {
+            "comment" : request.POST.get('comment'),
+            "name" : current_student.account.username,
+            "email" : current_student.account.email,
+            "date" : datetime.utcnow(),
+            "rating" : int(request.POST.get('rating')),
+        }
+        
+    else:
+        fb={
+            "comment" : request.POST.get('comment'),
+            "name" : request.POST.get('name'),
+            "email" : request.POST.get('email'),
+            "date" : datetime.utcnow(),
+            "rating" : int(request.POST.get('rating')),
+        }
+
+    db.user_feedback.insert_one(fb)
+    messages.success(request, 'feedback sent')
+    return redirect('/')
+
+def admin_feedback(request):
+    db = client.get_database('course_recommender')
+    fbs = list(db.user_feedback.find())
+    return render(request, 'admin-feedbacks.html', context = {
+        'fbs' : fbs,
+    })
 
 
 def courses_list(request):
@@ -71,7 +109,7 @@ def courses_list(request):
 @login_required
 def courses_cb(request):
     #get content-based filtering list
-    subs = get_enrolled_subjects(request.user.id)
+    '''subs = get_enrolled_subjects(request.user.id)
     if len(subs) == 0:
         recommmend_list = list(Course.objects.all())
     else:
@@ -89,7 +127,8 @@ def courses_cb(request):
             l2 +=list(Course.objects.filter(level = sub.course.level))
             l2 +=list(Course.objects.filter(certificate = sub.course.certificate))
             l2=list(set(l2))
-        recommmend_list = list(set(l1+l2))
+        recommmend_list = list(set(l1+l2))'''
+    recommmend_list = get_recommendations(request.user.id)
 
     paginator = Paginator(recommmend_list, 6)
     page = request.GET.get('page')
@@ -108,7 +147,7 @@ def courses_cb(request):
 @login_required
 def courses_cf(request):
     #get content-based filtering list
-    subs = get_enrolled_subjects(request.user.id)
+    '''subs = get_enrolled_subjects(request.user.id)
     if len(subs) == 0:
         recommmend_list = random.choices(list(Course.objects.all()), k=min(len(list(Course.objects.all())),10))
     else:
@@ -125,8 +164,8 @@ def courses_cf(request):
             l2 +=list(Course.objects.filter(language = sub.course.language))
             l2 +=list(Course.objects.filter(level = sub.course.level))
             l2=list(set(l2))
-        recommmend_list = random.choices(list(set(l1+l2)), k=min(len(list(set(l1+l2))),10))
-
+        recommmend_list = random.choices(list(set(l1+l2)), k=min(len(list(set(l1+l2))),10))'''
+    recommmend_list = get_recommendations_cf(request.user.id)
     #Pagination
     paginator = Paginator(recommmend_list, 6)
     page = request.GET.get('page')
@@ -400,6 +439,7 @@ def comparator(request):
             'courses_page': 'active',
             'course1': course1,
             'course2': course2,
+
         }
         return render(request, 'comparator-result.html',context)
     
@@ -410,3 +450,5 @@ def comparator(request):
         'courses_size': courses.__len__
     }
     return render(request, 'comparator.html', context)
+
+
