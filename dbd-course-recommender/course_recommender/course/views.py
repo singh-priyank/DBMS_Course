@@ -18,7 +18,7 @@ from .services import get_enrolled_subjects, get_recommmendations,get_recommenda
 
 from datetime import datetime
 
-client = MongoClient('mongodb+srv://sami:samiassadi279@cluster0.ytj9s.mongodb.net/course_recommender?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://sami:<pw>@cluster0.ytj9s.mongodb.net/course_recommender?retryWrites=true&w=majority')
 
 def home(request):
     domains = Domain.objects.all()
